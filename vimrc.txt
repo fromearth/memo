@@ -1,0 +1,17 @@
+" for Linux
+":syntax off
+colorscheme desert
+"
+set encoding=utf-8
+set fileencoding=
+set fileencodings=iso-2022-jp,utf-8,cp932,euc-jp
+set fileformats=unix,dos,mac
+"
+set shiftwidth=4
+set tabstop=4
+set autoindent
+"
+set nobackup
+set ignorecase
+"
+set ambiwidth=double
