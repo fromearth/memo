@@ -1,2 +1,1 @@
-h2. 
-%{color:Red}ただのメモ書き / ToDoなど%
+h2. %{color:Red}ただのメモ書き / ToDoなど%
