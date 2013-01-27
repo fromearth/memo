@@ -1,4 +1,8 @@
-## ƒRƒ}ƒ“ƒh‚ß‚à
+## ã‚³ãƒãƒ³ãƒ‰ã‚ã‚‚
 
-## w’èƒfƒBƒŒƒNƒgƒŠˆÈ‰º‚©‚çA"hoge" ‚ğŠÜ‚Şƒtƒ@ƒCƒ‹‚ğ”²‚«o‚·
+## æŒ‡å®šãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä»¥ä¸‹ã‹ã‚‰ã€"hoge" ã‚’å«ã‚€ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æŠœãå‡ºã™
 $ find ./foo ./bar -name "*.php" -print | xargs grep hoge | awk -F : '{print $1}' | sort | uniq
+
+## yumã§ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚ŒãŸã‚‚ã®è¡¨ç¤º
+$ yum list installed
+$ yum install <packageName>
