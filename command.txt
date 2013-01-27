@@ -1,0 +1,4 @@
+## コマンドめも
+
+## 指定ディレクトリ以下から、"hoge" を含むファイルを抜き出す
+$ find ./foo ./bar -name "*.php" -print | xargs grep hoge | awk -F : '{print $1}' | sort | uniq
