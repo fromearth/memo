@@ -1,0 +1,33 @@
+
+## リモートリポジトリを取得する
+$ git clone [Server] [/path/to/local]
+
+
+## ブランチを切らずに(masterのみで）作業する手順
+$ vi file.ext					ファイル編集
+$ git add .						編集ファイルをステージングに登録して認識させる
+$ git commit -m "message"		ローカルリポジトリにコミット
+$ git push						リモートリポジトリにコミット
+
+
+## ブランチを切って作業する手順
+$ git branch					最初のブランチはmasterであることが確認できる
+$ git pull						ソースを最新に保つ
+$ git branch newBranch			"newBranch"というブランチを作成
+$ git checkout newBranch		"newBranch"へ移動
+$ vi file.ext					newBranchのファイルを編集
+$ git add .						newBranchのステージングに登録
+$ git commit -m "message"		ローカルにコミット
+$ git checkout master
+$ git pull
+$ git checkout newBranch
+$ git merge master
+$ git checkout master
+$ git merge --squash newBranch
+$ git commit -m "message"
+$ git push
+
+※masterブランチでは、ファイル編集しない。
+※ブランチ作成は必ずmasterでgit pull後に行う。
+※編集したら、そのブランチで「git add .」「git commit」まで行う。
+
