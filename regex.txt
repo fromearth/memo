@@ -1,0 +1,13 @@
+■ＰＨＰの正規表現
+
+肯定先読み (?=pattern)   foo(?=bar)
+否定先読み (?!pattern)   foo(?!bar)   応用 /^(?!foo).*/ fooで始まらない場合にマッチ
+肯定後読み (?<=pattern)  (?<=bar)foo  Perlでは(?<bar)foo
+否定後読み (?<!pattern)  (?<!bar)foo  Perlでは(!<bar)foo
+
+
+ある文字列とある文字列を含むものにマッチする
+(?=.*foo)(?=.*bar)
+
+ある文字列を含まないものにマッチする
+(?:(?!foo).)*
