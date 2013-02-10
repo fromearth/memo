@@ -1,11 +1,35 @@
 
+## 設定
+$ git config --global user.name "my name"
+$ git config --global user.email my@example.com
+$ git config --global core.editor vim
+$ git config --global color.ui auto
+$ git config --global core.autocrlf false
+※Linux環境で作業した時に autocrlf=trueやinputに指定したらひどい目に遭った。
+　git pull直後にgit diffで大量に表示されてしまう。
+
+
+## 設定の確認
+$ git config --list
+$ git config --global --list
+
+
+## ヘルプを見る
+$ git --help
+※git全体のヘルプを見る場合
+
+$ git commit --help
+$ git checkout --help
+※gitのコマンド別ヘルプを見る場合は「git コマンド名 --help」の順番
+
+
 ## リモートリポジトリを取得する
 $ git clone [Server] [/path/to/local]
 
 
 ## ブランチを切らずに(masterのみで）作業する手順
 $ vi file.ext					ファイル編集
-$ git add .						編集ファイルをステージングに登録して認識させる
+$ git add .						編集ファイルをステージングに登録してGit管理下に
 $ git commit -m "message"		ローカルリポジトリにコミット
 $ git push						リモートリポジトリにコミット
 
@@ -27,7 +51,36 @@ $ git merge --squash newBranch
 $ git commit -m "message"
 $ git push
 
-※masterブランチでは、ファイル編集しない。
+※常にリモートリポジトリとローカルmasterは完全一致させておく。その為に、以下のことを厳守する。
+※masterブランチでは、原則ファイル編集しない。
+※git pull はmasterでのみ行う。
 ※ブランチ作成は必ずmasterでgit pull後に行う。
 ※編集したら、そのブランチで「git add .」「git commit」まで行う。
+※他ブランチへ移動する際は必ずgit statusを行い、コミット漏れがないことを確認してから移動する。
 
+
+## コミットログを確認する
+$ git log <file>
+
+
+## コミットしてない分のdiffを見る
+$ git diff <file>
+
+
+## 個別に指定したブランチからファイル取得
+$ git checkout <branch名> file
+※取得直後は git add した状態、すなわちGit管理下に登録した状態となるのでこれはコミットしておく必要がある
+
+
+## Git管理下にあるファイルを削除
+$ git rm /path/to/target
+
+
+## コミットを戻す
+※なにも管理下でコミット忘れがないことを確認(git status)してから作業
+$ git reset --hard HEAD^
+
+
+## 直前のコミットをやり直す
+$ git commit --amend
+※当然、git add . 後に行う
