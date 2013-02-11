@@ -1,0 +1,7 @@
+h1. ■ 開発で使えるJavaScriptいろいろ
+
+
+h2. スクロールをスムーズにする
+
+bq. &lt;script type="text/javascript" src="/js/smoothScroll.js"&gt;&lt;/script&gt;
+
