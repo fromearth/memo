@@ -4,6 +4,7 @@ $ git config --global user.name "my name"
 $ git config --global user.email my@example.com
 $ git config --global core.editor vim
 $ git config --global color.ui auto
+$ git config --global core.editor 'vim -c "set fenc=utf-8"'
 $ git config --global core.autocrlf false
 ※Linux環境で作業した時に autocrlf=trueやinputに指定したらひどい目に遭った。
 　git pull直後にgit diffで大量に表示されてしまう。
