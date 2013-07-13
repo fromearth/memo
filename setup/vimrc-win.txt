@@ -16,5 +16,10 @@ let loaded_matchparen=1
 set nobackup
 "クリップボードをWindowsと連携
 source $VIMRUNTIME/mswin.vim
+"最大1000行まで文字コード判定に使用
+let g:verifyenc_maxlines = 1000
+"自動改行機能Off
+set textwidth=0
+set formatoptions=q
 "
 set statusline=%f%{'['.(&fenc!=''?&fenc:&enc).'-'.&ff.']'}\ \0\x%B%=%l,%c%V%8P
