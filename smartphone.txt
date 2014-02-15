@@ -6,21 +6,26 @@
 <meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,initial-scale=1.0,user-scalable=yes">
 
 ■メディアクエリを使ったデバイス・ピクセル比ごとの指定
--webkit-device-pixel-ratio ・・・指定値のデバイスにのみにマッチ
+-webkit-device-pixel-ratio ・・・指定値のデバイスにのみマッチ
 -webkit-min-device-pixel-ratio　・・・指定値以上のデバイスにマッチ
-日本のキャリアが販売している多くのandroid端末はこのdevicePixelRatioの値が1.5になっています。(2011年1月現在)
 
 @media only screen and (-webkit-device-pixel-ratio: 1.5),
  only screen and (device-pixel-ratio: 1.5) { /* 多くのAndroid端末 */
-    zoom: 150%;
+    body {
+        zoom: 150%;
+    }
 }
 @media only screen and (-webkit-device-pixel-ratio: 2),
  only screen and (device-pixel-ratio: 2) { /* iPhone4, iPhone5 */
-    zoom: 200%;
+    body {
+        zoom: 200%;
+    }
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 3),
  only screen and (min-device-pixel-ratio: 3) { /* これ以上の超高解像度はとりあえずここでまとめて３倍拡大表示 */
-    zoom: 300%;
+    body {
+        zoom: 300%;
+    }
 }
 
 ■その他CSSの指定
