@@ -47,3 +47,25 @@ h1{color:red}. 赤字ヘッドライン
 !http://foo/bar.jpg!  => <img src=http://foo/bar.jpg> に相当
 
 
+・テーブル
+|_. 中央寄せ＋太字|
+|<. 左寄せ|
+|>. 右寄せ|
+|=. 中央寄せ|
+|\2. colspan|
+|/2. rowspan|
+
+
+・シンタックスハイライト
+<pre><code class="css">
+</code></pre>
+
+<pre><code class="html">
+</code></pre>
+
+<pre><code class="php">
+</code></pre>
+
+<pre><code class="sql">
+</code></pre>
+
