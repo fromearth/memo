@@ -1,8 +1,0 @@
-## 開発で使うコマンド
-
-## 指定ディレクトリ以下から、"hoge" を含むファイルを抜き出す
-$ find ./foo ./bar -name "*.php" -print | xargs grep hoge | awk -F : '{print $1}' | sort | uniq
-
-## yumでインストールされたもの表示
-$ yum list installed
-$ yum install <packageName>
