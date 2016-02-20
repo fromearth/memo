@@ -1,0 +1,13 @@
+#################################################################
+# read関数
+#
+# @filename read.txt
+# @category Shell
+# @package  ShellRead
+# @author   fromearth
+# @link     https://github.com/fromearth
+#################################################################
+
+
+# 標準入力から１行読み出して変数に格納
+read HOGE

@@ -1,0 +1,35 @@
+#################################################################
+# 制御構造case文
+#
+# @filename case.txt
+# @category Shell
+# @package  ShellCase
+# @author   fromearth
+# @link     https://github.com/fromearth
+#################################################################
+
+while [ $# -ge 1 ]; do
+    case $1 in
+        -p*)    PREFIX=`echo $1 | cut -c3-`;;
+        -p)     shift; PREFIX=$1 ;;
+        -*)     echo $Usage; exit 1 ;;
+        *)      FILE=$*; break ;;
+    esac
+
+    shift
+done
+
+
+# ;; は、case文を抜けるという意味
+
+
+case $var in
+    # "No" "false" "Off" 0
+    [Nn][Oo]|[Ff][Aa][Ll][Ss][Ee]|[Oo][Ff][Ff]|0)
+        echo "FALSE"
+        ;;
+    # else
+    *)
+        echo "TRUE"
+        ;;
+esac

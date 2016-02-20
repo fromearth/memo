@@ -1,0 +1,12 @@
+########################################################
+# 他シェルスクリプトを読み込んで実行
+#
+# @filename include.txt
+# @category Shell
+# @package  ShellInclude
+# @author   fromearth
+# @link     https://github.com/fromearth
+########################################################
+
+
+. /path/to/file.sh

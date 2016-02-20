@@ -1,0 +1,75 @@
+/**
+ * ファイル（ディレクトリ）検索
+ *
+ * [検索の種類]
+ * ・ファイル名（ディレクトリ名）でマッチさせる
+ * ・ファイル内容にマッチさせる
+ *
+ * @filename find.txt
+ * @category Cmd
+ * @package  CmdFind
+ * @author   fromearth
+ * @link     https://github.com/fromearth
+ */
+
+
+/**
+ * 今いるディレクトリ配下にあるファイル一覧表示
+ *
+ * -type f        ..ファイル限定
+ */
+$ find . -type f
+
+
+/**
+ * ファイル名にマッチさせる
+ *
+ * \( ... \)      ..複数条件をまとめる
+ * -iname "*foo*" ..名前に "foo" を含む（英大小文字分けない）
+ * -o             ..or条件連結
+ * -print         ..フルパスで改行付き標準出力
+ * ! 条件         ..条件の否定
+ */
+$ find /path/to/dir1/ /path/to/dir2/ -type f \( -iname "*foo*" -o -iname "*.html" \) -print > files.txt
+
+// 特定ファイル名を除外する
+$ find /path/to/dir1/ /path/to/dir2/ -name "*.php" ! -name exclude.php -print > files.txt
+
+
+/**
+ * ディレクトリ名にマッチさせる
+ *
+ * -type d        ..ディレクトリ限定
+ */
+$ find /path/to/dir1/ /path/to/dir2/ -type d \( -iname "*foo*" -o -iname "*bar*" \) -print > dirs.txt
+
+
+/**
+ * ファイル名またはディレクトリ名にマッチさせる
+ */
+$ find /path/to/dir1/ /path/to/dir2/ \( -iname "*foo*" -o -iname "*bar*" \) -print > found.txt
+
+
+/**
+ * 上記で検索したファイルまたはディレクトリ配下に対して、ファイル内容を検索する
+ *
+ * -L                   ..シンボリックリンクをたどるオプション指定
+ * `cat filename`       ..ファイル内に書かれたファイルパスまたはディレクトリを半角スペース連結して展開
+ * -type f              ..検索結果をファイルのみに絞る
+ * -print               ..フルパスで改行付き標準出力
+ * | xargs              ..パイプを通して取得したファイルリストを、それぞれ右側コマンドに適用する
+ * "foo\|bar"           .."foo"または"bar"にマッチした行
+ * "\<foo\>\|bar"       .."foo"または"bar"にマッチした行。"foo"の方は境目にマッチさせる
+ * awk -F: '{print $1}' ..":"で区切った１番目データ抜き出し
+ * | sort | uniq        .. 並べ替えて、隣り合った同じデータがあれば１つにまとめる
+ */
+$ find -L `cat files.txt dirs.txt` -type f -print | xargs grep "\<foo\>\|\<bar\>" | awk -F: '{print $1}' | sort | uniq > result.txt
+
+
+※ grep のパターンマッチには、vimとの親和性が高い記法を使うと便利
+   Foo\|Bar や \<Foo\> や \(Foo\|Bar\) のようなものが使える
+
+// 検索結果の複数ファイルをエディタで開く
+$ vi `cat result.txt`
+
+// vimで開いた状態で、そのままパターン検索 /\<foo\>\|bar とすることでマッチした箇所へ簡単に飛べる

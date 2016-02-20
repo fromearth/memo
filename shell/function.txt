@@ -1,0 +1,93 @@
+#####################################################
+# 関数
+#
+# @filename function.txt
+# @category Shell
+# @package  ShellFunction
+# @author   fromearth
+# @link     https://github.com/fromearth
+#####################################################
+
+
+
+########################################
+# 関数の定義
+#
+# 定義する位置は、呼び出す前
+########################################
+function foo() {
+}
+
+# functionは省略できるので普通は以下のように書く
+foo() {
+}
+
+# 値を返却するにはreturn
+foo() {
+    return 1
+}
+
+# 関数の第1引数は $1 で受け取ることができる
+foo() {
+    # 引数をそのまま返す
+    return $1
+}
+
+# 関数内変数は localで局所宣言したほうが手堅い
+foo() {
+    # 引数を加工して返す
+    local result=`expr $1 + 10`
+
+    return $result
+}
+
+# 値返却の工夫
+foo() {
+    local result=foo
+
+    return ${result}.txt
+}
+
+
+
+########################################
+# 関数の呼び出し
+#
+# 呼出しは、必ず関数定義より後
+########################################
+# 引数なし関数呼び出し
+foo
+
+# 引数あり関数呼び出し
+foo $bar
+
+echo $?   # 直前の処理がreturnした値を表示
+
+
+
+########################################
+# 関数の記述例いろいろ
+########################################
+# コマンドの使い方表示用関数例
+print_usage() {
+    echo "Usage: command [-a name=value] [-b] [-c option]"
+    echo "       command --test"
+}
+
+
+# ヒアドキュメントと組み合わせ
+print_usage() {
+	cat <<-EOT
+	Usage: command [options]
+	
+	Options:
+	  -a
+	EOT
+}
+
+
+# 標準エラー出力
+print_error_exit() {
+    echo "$*" >&2
+    exit 1
+}

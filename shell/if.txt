@@ -1,0 +1,23 @@
+#################################################################
+# 制御構造if文
+#
+# @filename if.txt
+# @category Shell
+# @package  ShellIf
+# @author   fromearth
+# @link     https://github.com/fromearth
+#################################################################
+
+if 条件; then
+     コマンド
+elif 条件; then
+     コマンド
+else
+     コマンド
+fi
+
+
+if [ $USER_ID -ne 0 ]; then
+    echo "You must be super-user to execute $0"
+    exit 1
+fi

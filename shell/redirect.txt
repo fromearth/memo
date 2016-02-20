@@ -1,0 +1,29 @@
+#######################################################
+# リダイレクト
+#
+# @filename redirect.txt
+# @category Shell
+# @package  ShellRedirect
+# @author   fromearth
+# @link     https://github.com/fromearth
+#######################################################
+
+
+# 出力を抑制する / 標準エラー出力先を標準出力に向けて、cmd出力をすべて/dev/nullへ書き出す
+$ cmd > /dev/null 2>&1
+
+
+# エラーメッセージだけを捨てる
+$ cmd 2> /dev/null
+
+
+# エラーメッセージの出力例
+# >&2 と 1>&2 は同じ ... >& は、左側ディスクリプタを閉じ右側ディスクリプタの複製にする書き方
+echo "$*" >&2
+exit 1
+
+
+# ファイルから１行ずつ読み込みつつ処理
+while read line; do
+    # ここで処理
+done < /path/to/input.txt

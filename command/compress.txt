@@ -1,0 +1,83 @@
+/**
+ * 圧縮／解凍メモ
+ *
+ * @filename compress.txt
+ * @category Cmd
+ * @package  CmdCompress
+ * @author   fromearth
+ * @link     https://github.com/fromearth
+ */
+
+
+
+/**
+ * zip形式（拡張子.zip）
+ * Windowsで解凍するならこのZIP形式
+ */
+// 圧縮
+$ zip <output.zip> file1 file2
+$ zip -r <output.zip> dir           // ディレクトリの場合は -rオプション付き
+$ zip -e <output.zip> file1 file2            // 暗号化ZIP 対話形式で２度パスワード入力
+$ zip -P <password> <output.zip> file1 file2 // バッチ処理で暗号化ZIP作成する場合
+
+// 解凍
+$ unzip <input.zip>
+
+
+/**
+ * tar + gzip形式（拡張子.tar.gz .tgz）
+ *
+ * z  .. 圧縮／解凍を同時に行う
+ * c  .. create 新しいアーカイブ
+ * x  .. アーカイブからファイル抽出
+ * v  .. verboseモード。追加情報表示
+ * f  .. アーカイブファイル名指定
+ */
+// 圧縮
+$ tar zcvf <output.tar.gz> file1 file2
+
+// 解凍
+$ tar zxvf <input.tar.gz>
+$ cat <input.tar.gz> | gzip -d | tar xvf -
+$ zcat <input.tar.gz> | tar xvf -
+$ gzcat <input.tar.gz> | tar xvf -
+
+
+
+/**
+ * tar + compress形式（拡張子.tar.Z .taz）
+ */
+// 圧縮
+$ tar Zcvf <output.tar.Z> file1 file2
+
+// 解凍
+$ cat <input.tar.Z> | uncompress | tar xvf -
+$ gzcat <input.tar.Z> | tar xvf -
+
+
+
+/**
+ * tar + bzip2形式（拡張子.tar.bz2 .tbz2）
+ */
+// 圧縮
+$ tar jcvf <output.tar.bz2> file1 file2
+
+// 解凍
+$ tar jxvf <input.tar.bz2>
+$ cat <input.tar.bz2> | bzip2 -d | tar xvf -
+$ bzcat <input.tar.bz2> | tar xvf -
+
+
+
+/**
+ * lha形式（拡張子.lz）
+ */
+// 圧縮
+$ lha a <output.lzh> file1 file2
+
+// 解凍
+$ lha e <input.lzh>
+$ lha x <input.lzh>
+
+
+

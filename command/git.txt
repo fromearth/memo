@@ -1,0 +1,275 @@
+/**
+ * Gitコマンド
+ *
+ * @filename git.txt
+ * @category Memo
+ * @package  MemoGit
+ * @author   fromearth
+ * @link     https://github.com/fromearth
+ */
+
+
+
+/**
+ * 初期設定
+ *
+ * 少なくとも「ユーザ名」「メールアドレス」設定しておかないとエラー出る？
+ * --global付けないと、現在のリポジトリしか設定されない
+ */
+$ git config --global user.name "my name"
+$ git config --global user.email myname@example.com
+$ git config --global color.ui auto
+$ git config --global core.editor 'vim -c "set fenc=utf-8"'
+$ git config --global core.autocrlf false
+
+// 設定内容を表示
+$ git config --global --list
+
+
+
+/**
+ * リモートリポジトリの取得
+ */
+$ git clone https:/hostname/path/to/repo_name.git [/path/to/local_dir]
+$ git clone ssh://username@hostname/path/to/repo [/path/to/local_dir]
+
+
+
+/**
+ * Gitで管理するかどうか制御するための設定
+ *
+ */
+// 対象外にしたいファイルは .gitignoreファイルを作成し追記してこれをコミット
+$ echo <filename> >> .gitignore
+
+// 空ディレクトリを管理下にする方法
+$ mkdir <dirname>
+$ touch <dirname>/.gitkeep
+
+$ cat <repo_root>/.gitignore
+path/to/<dirname>/*
+!.gitkeep
+
+
+
+/**
+ * ブランチ操作
+ *
+ * リポジトリにははじめ、masterブランチのみが存在する
+ * 開発時はタスクごとに別ブランチを作成し、並行して作業を進め管理していくのが一般的
+ */
+// そのリポジトリに存在するブランチ一覧
+$ git branch        ※今いるブランチには *マークが付いている
+
+// 新規ブランチ作成＆新規ブランチへ切替
+$ git checkout -b <branchname>
+
+// 上記コマンドは、以下2つのコマンドと等価だが面倒なので実践では使うことがない
+$ git branch <branchname>
+$ git checkout <branchname>
+
+// ブランチ間の移動（作業ブランチを切る場合に多用するコマンド）　※移動前は必ず git statusしてコミット忘れがないように
+$ git checkout <branchname>
+
+// ブランチ名を変更
+$ git branch -m <branchname> <new_branchname>
+
+// ブランチを削除 / git branchの使いどころ
+$ git branch       // ブランチ一覧を見て、不要なブランチがあることを確認
+$ git branch -D <branchname>
+
+
+
+/**
+ * リポジトリの（現在ブランチの）ステータスを見る
+ *
+ * 確認できる内容
+ * ・新規ファイル（Git管理下にない状態）
+ * ・Git管理下にあるファイルが編集された
+ * ・Git管理下にあるファイル名が変更された
+ * ・Git管理下にあるファイルが削除された
+ * ・Git管理下にあるファイルのパーミッションが変更された
+ */
+$ git status
+
+
+
+/**
+ * インデックスに登録する
+ *
+ * 新規作成ファイルおよびGit管理下ファイルに変更を加えた場合、コミット前にインデックス登録する必要がある
+ */
+$ git add <filepattern>    // ファイルパターン *.txt のような指定もできる
+
+// 以下のようにすると、すべての新規ファイル更新ファイルをインデックスに登録できる
+$ cd <repo_root>
+$ git add .
+
+
+
+/**
+ * インデックス登録ファイルをコミットする
+ */
+$ git commit -m "commit message"
+
+
+
+/**
+ * インデックスに登録したファイルを登録から外す
+ *
+ * インデックス登録後、まだコミットまでは行っていない状態のファイルに対して登録から外すコマンド
+ */
+$ git reset HEAD <filename>
+
+
+
+/**
+ * 編集したファイルと編集前との差分を見る
+ */
+$ git diff <filename>
+
+// すべての編集の差分を見る
+$ git diff
+
+
+
+/**
+ * 編集したファイルを、編集前に戻す（インデックス登録前のファイルが対象）
+ */
+$ git checkout <filename>
+
+// 指定ブランチのファイルを取得
+$ git checkout <branchname> <filename>
+
+
+
+/**
+ * 新規/編集ファイルがあるブランチから別ブランチへ移動する
+ *
+ * 変更があるブランチをそのままにして、別ブランチへの移動はできない
+ */
+// ①コミットまで行ってからブランチ移動
+$ cd <repo_root>
+$ git add .
+$ git commit -m "Here is commit message."
+$ git checkout <another_branchname>
+
+// ②スタッシュを使ってブランチ移動する方法
+$ cd <repo_root>
+$ git add .
+$ git stash
+$ git checkout <another_branchname>
+
+
+
+/**
+ * スタッシュ操作
+ */
+// 変更をスタッシュ登録
+$ cd <repo_root>
+$ git add .
+$ git stash
+
+// スタッシュ一覧
+$ git stash list
+
+// スタッシュを適用する
+$ git stash apply stash@{1}
+
+// スタッシュ削除
+$ git stash drop stash@{1}
+
+
+
+/**
+ * Git用語整理
+ *
+ * リモートリポジトリ
+ * ローカルリポジトリ
+ *
+ * origin ... リポジトリの場所(URL)の別名
+ *
+ * masterブランチ   ... リポジトリにはじめから存在するブランチ
+ * その他のブランチ ... リポジトリ上で作成したブランチ
+ *
+ * HEAD    ... 最新のコミット
+ * HEAD^   ... 1つ前のコミット
+ * HEAD^^^ ... 3つ前のコミット
+ */
+
+
+
+/**
+ * 差分表示いろいろ
+ */
+// インデックスとの差分
+$ git diff <filename>
+
+// 最新コミットとの差分
+$ git diff HEAD <filename>
+
+// git fetch結果との差分
+$ git diff FETCH_HEAD <filename>
+
+// リモートmasterブランチ最新との差分
+$ git diff remotes/origin/master <filename>
+
+
+
+/**
+ * 開発時のコマンド使用例
+ *
+ * masterブランチでは開発作業を行わない（masterブランチを汚染させない）
+ * 作業用ブランチ（トピックブランチ）を作成してそこで開発作業を行う
+ * プッシュ直前にmasterブランチを最新にする（pushおよびpullはmasterブランチでのみ行う）
+ * 最新masterブランチをマージして競合の有無や動作確認を行う
+ */
+$ git checkout -b new_branch      // 作業ブランチ作成・移動
+$ echo "new file" > new_file      // 新規ファイル作成
+$ git add new_file                // 新規ファイルをインデックスに登録
+$ git commit -m "new_file added"  // ローカルリポジトリにコミット
+$ git checkout master             // masterブランチへ移動
+$ git pull                          // masterブランチを最新に
+$ git checkout new_branch           // 作業ブランチへ移動
+$ git merge master                // masterブランチの最新をマージ
+       < このとき競合が出れば、手作業で修正/動作確認 >
+$ git checkout master             // masterブランチへ移動
+$ git merge --squash new_branch     // new_branchブランチでの変更を１つのコミットにしてマージ
+$ git commit -m "commit message"    // --squashするとマージのみ行われコミットされないのでここでコミット
+$ git push                          // リモートリポジトリに反映
+
+
+
+/**
+ * 開発に便利なコマンド
+ */
+// 過去１０コミットログの差分表示
+$ git log -10 -p <filename>
+// リモートリポジトリと差分のあるファイルごとのステータス表示
+$ git diff --name-status remotes/origin/master
+// リモートリポジトリと差分のあるファイル表示
+$ git diff --name-only remotes/origin/master
+
+
+
+/**
+ * 特定バージョンのファイルを取得
+ */
+$ git log <filename>        // 履歴を見てハッシュを確認
+$ git show {ハッシュ}:<filename> >/path/to/output.log  // そのままでは標準出力されるのでリダイレクトでファイル保存
+
+
+
+/**
+ * その他コマンド
+ */
+// Git管理下のファイルを削除
+$ git rm <filename>
+// まだGit管理下になくてインデックス登録もしていないファイルを削除
+$ rm <filename>
+// ファイル名を変更（ファイル移動にも使える）
+$ git mv <filename> <new_filename>
+// コミットログにファイルリストを表示させる
+$ git log --stat
+
+

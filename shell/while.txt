@@ -1,0 +1,46 @@
+#################################################################
+# 制御構造whileループ文
+#
+# @filename while.txt
+# @category Shell
+# @package  ShellWhile
+# @author   fromearth
+# @link     https://github.com/fromearth
+#################################################################
+
+
+# whileループ {while|until} 条件
+do
+
+     コマンド
+done
+
+COUNT=1
+while [ $COUNT -le 10 ];
+do
+    echo "$COUNT"
+    COUNT=`expr $COUNT + 1`
+done
+
+
+
+# 無限ループ
+while :
+do
+    break
+done
+
+
+
+# ファイルから１行ずつ読み込む
+while read READ_LINE;
+do
+    echo "$READ_LINE";
+done < file.txt
+
+
+# パイプを使うと、サブシェル起動で処理される為、while内部で変数に加えた変更が現シェルに反映されないので注意
+cat file |
+while read p i; do
+
+done

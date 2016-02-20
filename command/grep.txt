@@ -1,0 +1,56 @@
+/**
+ * ファイル内容を検索
+ *
+ * @filename grep.txt
+ * @category Cmd
+ * @package  CmdGrep
+ * @author   fromearth
+ * @link     https://github.com/fromearth
+ */
+
+
+/**
+ * マッチ行の前後を表示
+ *
+ * -B 1   ...マッチ行の前1行も表示させる
+ * -A 3   ...マッチ行の後3行も表示させる
+ */
+$ grep -B 1 -A 3 function *.php
+
+
+/**
+ * 英大小文字を区別しない
+ */
+$ grep -i FOO *.php
+
+
+/**
+ * 行番号も表示
+ */
+$ grep -n FOO *.php
+
+
+/**
+ * マッチしない行を表示
+ */
+$ grep -v FOO *.php
+
+
+/**
+ * バッファリング回避
+ */
+$ tail -f access.log | grep --line-buffered FOO
+
+
+/**
+ * Binary検索回避
+ */
+$ grep -a FOO *.*
+
+
+/**
+ * 行頭／行末を検索
+ */
+$ grep "^FOO" *.*
+
+$ grep "FOO$" *.*

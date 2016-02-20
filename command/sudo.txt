@@ -1,0 +1,15 @@
+/**
+ * 別ユーザ権限でプログラム実行するためのコマンド
+ *
+ * @filename sudo.txt
+ * @category Cmd
+ * @package  CmdSudo
+ * @author   fromearth
+ * @link     https://github.com/fromearth
+ */
+
+
+/**
+ * nologinユーザに成る方法
+ */
+$ sudo su -s /bin/bash <nologin_user>

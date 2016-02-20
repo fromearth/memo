@@ -1,0 +1,29 @@
+/**
+ * 差分を表示
+ *
+ * @filename diff.txt
+ * @category Cmd
+ * @package  CmdDiff
+ * @author   fromearth
+ * @link     https://github.com/fromearth
+ */
+
+
+/**
+ * 差分を見やすいフォーマットで表示
+ *
+ * -u    ...Unified形式
+ */
+$ diff -u a.txt b.txt
+
+
+/**
+ * 改行コードの違いを無視
+ */
+$ diff --strip-trailing-cr a.txt b.txt
+
+
+/**
+ * ディレクトリ同士の比較
+ */
+$ diff -r dir1 dir2

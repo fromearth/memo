@@ -1,0 +1,80 @@
+###########################################################
+# コマンドライン引数処理
+#
+# 組み込みコマンドgetoptsを使った処理
+#
+# @filename getopts.txt
+# @category Shell
+# @package  ShellGetopts
+# @author   fromearth
+# @link     https://github.com/fromearth
+###########################################################
+
+
+########################################
+# -a -b -c 以外は自動的にエラー処理
+# -a -b -c いずれも省略可
+########################################
+while getopts "abc" opt; do
+    case $opt in
+        a)
+            echo a
+            ;;
+        b)
+            echo b
+            ;;
+        c)
+            echo c
+            ;;
+    esac
+done
+
+
+
+########################################
+# -a -b -c 以外でも自前でエラー処理
+########################################
+while getopts ":abc" opt; do
+    case $opt in
+        a)
+            echo a
+            ;;
+        b)
+            echo b
+            ;;
+        c)
+            echo c
+            ;;
+        *)
+            echo error
+            ;;
+    esac
+done
+
+
+
+########################################
+# 値付きオプション処理
+########################################
+# "abc"なら、-a -b -c
+# "a:b:c:"なら、-a value -b value -c value
+while getopts "ab:c" opt; do
+    case $opt in
+        a)
+            echo a
+            ;;
+        b)
+            echo b
+            OPTION_VALUE=$OPTARG
+            ;;
+        c)
+            echo c
+            ;;
+    esac
+done
+
+if [ -z "$OPTION_VALUE" ]; then
+    echo "not found option -b"
+else
+    echo "found option -b"
+fi
